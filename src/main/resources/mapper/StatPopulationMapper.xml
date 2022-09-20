@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StatPopulationMapper">
+
+    <insert id="insertStatPopulationTrendSido" parameterType="com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO" >
+        INSERT INTO STAT_POPULATION_TREND_SIDO (
+        YYYYMM	,
+        SIDO2_CD	,
+        BIRTH_CNT	,
+        BIRTH_RATIO	,
+        DEATH_CNT	,
+        DEATH_RATIO	,
+        INCREASE_CNT	,
+        INCREASE_RATIO	,
+        MARRY_CNT	,
+        MARRY_RATIO	,
+        DIVORCE_CNT	,
+        DIVORCE_RATIO	,
+        CREATE_TIME	,
+        CREATE_USER
+        )
+        VALUES (
+        #{yyyymm}	,
+        #{sido2Cd}	,
+        #{birthCnt}	,
+        #{birthRatio}	,
+        #{deathCnt}	,
+        #{deathRatio}	,
+        #{increaseCnt}	,
+        #{increaseRatio}	,
+        #{marryCnt}	,
+        #{marryRatio}	,
+        #{divorceCnt}	,
+        #{divorceRatio}	,
+        now()	,
+        'system'
+        )
+    </insert>
+
+    <select id="selectExistChkStatPopulationTrendSido" parameterType="String" resultType="int">
+        <![CDATA[
+        SELECT COUNT(*) CNT
+          FROM STAT_POPULATION_TREND_SIDO A
+        WHERE A.YYYYMM = #{yyyymm}
+
+	]]>
+    </select>
+
+    <delete id="deletePopulationTrendSido" parameterType="String" >
+        <![CDATA[
+        DELETE
+          FROM STAT_POPULATION_TREND_SIDO A
+        WHERE A.YYYYMM = #{yyyymm}
+	]]>
+    </delete>
+
+    <insert id="insertStatPopulationMoveSido" parameterType="com.apimarket.openapi.biz.population.model.StatPopulationMoveSidoVO" >
+        INSERT INTO STAT_POPULATION_MOVE_SIDO (
+        YYYYMM	,
+        SIDO_CD	,
+        TOT_IN_CNT	,
+        TOT_OUT_CNT	,
+        NET_CNT	,
+        OVER_IN_CNT	,
+        OVER_OUT_CNT	,
+        CREATE_TIME	,
+        CREATE_USER
+        )
+        VALUES (
+        #{yyyymm}	,
+        #{sidoCd}	,
+        #{totInCnt}	,
+        #{totOutCnt}	,
+        #{netCnt}	,
+        #{overInCnt}	,
+        #{overOutCnt}	,
+        now()	,
+        'system'
+        )
+    </insert>
+
+    <select id="selectExistChkStatPopulationMoveSido" parameterType="String" resultType="int">
+        <![CDATA[
+        SELECT COUNT(*) CNT
+          FROM STAT_POPULATION_MOVE_SIDO A
+        WHERE A.YYYYMM = #{yyyymm}
+
+	]]>
+    </select>
+
+    <delete id="deletePopulationMoveSido" parameterType="String" >
+        <![CDATA[
+        DELETE
+          FROM STAT_POPULATION_MOVE_SIDO A
+        WHERE A.YYYYMM = #{yyyymm}
+	]]>
+    </delete>
+
+</mapper>

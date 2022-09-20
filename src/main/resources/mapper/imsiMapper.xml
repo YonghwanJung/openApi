@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.imsiMapper">
+
+    <select id="selectImsiInfoAll" resultType="com.apimarket.openapi.biz.imsi.model.ImsiVo">
+    <![CDATA[
+		SELECT KEY1,
+		       ITEM1,
+		       ITEM2
+		FROM IMSI
+	]]>
+    </select>
+
+    <insert id="insertAccidentRiskArea" parameterType="com.apimarket.openapi.biz.imsi.model.RestAccidentRiskAreaRVO" >
+    <selectKey resultType = "long" keyProperty="keyindex" order="BEFORE">
+        SELECT IFNULL(MAX(keyindex),0) + 1 AS keyindex FROM ACCIDENT_RISK_AREA
+    </selectKey>
+    <![CDATA[
+        INSERT INTO ACCIDENT_RISK_AREA
+        (
+          KEYINDEX,
+          ACC_RISK_AREA_NM,
+          TOT_ACC_CNT,
+          TOT_DTH_DNV_CNT,
+          TOT_SE_DNV_CNT,
+          TOT_SL_DNV_CNT,
+          TOT_WND_DNV_CNT,
+          CAUSE_ANALS_TY_NM,
+          CNTPNT_UTMK_X_CRD,
+          CNTPNT_UTMK_Y_CRD,
+          GEOM_WKT
+        )
+        VALUES
+        (
+          #{keyindex},
+          #{acc_risk_area_nm},
+          #{tot_acc_cnt},
+          #{tot_dth_dnv_cnt},
+          #{tot_se_dnv_cnt},
+          #{tot_sl_dnv_cnt},
+          #{tot_wnd_dnv_cnt},
+          #{cause_anals_ty_nm},
+          #{cntpnt_utmk_x_crd},
+          #{cntpnt_utmk_y_crd},
+          #{geom_wkt}
+
+        )
+     ]]>
+    </insert>
+
+</mapper>
