@@ -52,8 +52,8 @@
     <delete id="deletePopulationTrendSido" parameterType="String" >
         <![CDATA[
         DELETE
-          FROM STAT_POPULATION_TREND_SIDO A
-        WHERE A.YYYYMM = #{yyyymm}
+          FROM STAT_POPULATION_TREND_SIDO
+        WHERE YYYYMM = #{yyyymm}
 	]]>
     </delete>
 
@@ -94,8 +94,8 @@
     <delete id="deletePopulationMoveSido" parameterType="String" >
         <![CDATA[
         DELETE
-          FROM STAT_POPULATION_MOVE_SIDO A
-        WHERE A.YYYYMM = #{yyyymm}
+          FROM STAT_POPULATION_MOVE_SIDO
+        WHERE YYYYMM = #{yyyymm}
 	]]>
     </delete>
 

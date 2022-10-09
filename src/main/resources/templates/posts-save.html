@@ -1,0 +1,21 @@
+{{>layout/header}}
+{{=<% %>=}}
+<h1>통계데이터 적재</h1>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="title">시작년월~종료년월</label>
+                <input type="text" class="form-control" id="startYyyymm" placeholder="시작년월(yyyymm)을 입력하세요">
+                <input type="text" class="form-control" id="endYyyymm" placeholder="종료년월(yyyymm)을 입력하세요">
+            </div>
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-save1">인구동향 적재 </button>
+        <button type="button" class="btn btn-primary" id="btn-save2">인구이동 적재 </button>
+    </div>
+</div>
+<%={{ }}=%>
+{{>layout/common-lib}}
+<script src="/js/app/posts-save.js"></script>
+{{>layout/footer}}

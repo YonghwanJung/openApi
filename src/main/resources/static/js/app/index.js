@@ -1,29 +1,22 @@
 var main = {
-    init : function (){
-        var _this = this;
-        $('#btn-save').on('click', function () {
-            _this.save();
-        });
-    },
-    save : function () {
-        var data = {
-            yyyymm: $('#yyyymm').val()
-        };
+	mp_template: `Date: {{ date }} <br> 
+	Time: {{ time }} <br> 
+	Unix time: {{ milliseconds_since_epoch }}`,
+	repos: {
+  		"repos": []
+	},
+	init: function() {
+		var _this = this;
+		$("#btn").on('click', function() {
+			var template = $("#mp_template").html();
+			console.log(template);
+			//console.log(data);
+			var text = Mustache.render(template, main.repos);
+			console.log(text);
+			$("#mypanel").html(text);
 
-        $.ajax({
-            type: 'POST',
-            url: '/imsi/loadStatPopulationTrendSido',
-            dataType: 'text',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function(){
-            alert('정상처리되었습니다.');
-            window.location.href = '/';
-        }).fail(function(error) {
-            alert('에러');
-            alert(JSON.stringify(error));
-        });
-    }
+		});
+	}
 }
 
 main.init();

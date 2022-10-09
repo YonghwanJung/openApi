@@ -1,0 +1,20 @@
+{{>layout/header}}
+{{=<% %>=}}
+<h1>호수 사회문화경제연구소</h1>
+<div class="col-md-12">
+    <div class="col-md-6">
+        <a href="/posts/save" role="button" class="btn btn-primary">
+            통계자료 적재
+        </a>
+        <div id="mypanel"></div>
+        <script id="mp_template" type="x-tmpl-mustache">
+		{{#repos}}<b>{{name}}</b>{{/repos}}
+		{{^repos}}No repos :({{/repos}}
+		</script>
+    </div>
+</div>
+<%={{ }}=%>
+{{>layout/common-lib}}
+<script src="/js/app/index.js"></script>
+
+{{>layout/footer}}

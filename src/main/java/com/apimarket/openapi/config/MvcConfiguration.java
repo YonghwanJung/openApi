@@ -13,6 +13,8 @@ public class MvcConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         /* '/js/**'로 호출하는 자원은 '/static/js/' 폴더 아래에서 찾는다. */
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/").setCachePeriod(1);
+        /* '/html/**'로 호출하는 자원은 '/static/html/' 폴더 아래에서 찾는다. */
+        registry.addResourceHandler("/html/**").addResourceLocations("classpath:/static/html/").setCachePeriod(1);
         /* '/css/**'로 호출하는 자원은 '/static/css/' 폴더 아래에서 찾는다. */
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/").setCachePeriod(1);
         /* '/img/**'로 호출하는 자원은 '/static/img/' 폴더 아래에서 찾는다. */

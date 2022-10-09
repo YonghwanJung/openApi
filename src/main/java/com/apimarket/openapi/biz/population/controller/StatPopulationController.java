@@ -1,45 +1,63 @@
 package com.apimarket.openapi.biz.population.controller;
 
-import com.apimarket.openapi.biz.population.model.StatPopulationMoveSidoQVO;
-import com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoQVO;
-import com.apimarket.openapi.biz.population.repository.StatPopulationRepository;
-import com.apimarket.openapi.biz.population.service.StatPopulationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import java.nio.charset.Charset;
 
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.apimarket.openapi.biz.population.service.PopuMoveMmSidoService;
+import com.apimarket.openapi.biz.population.service.PopuTrendMmSidoService;
+import com.apimarket.openapi.config.data.Message;
+import com.apimarket.openapi.config.data.StatusEnum;
+import com.apimarket.openapi.config.data.YyyymmQVO;
 
 @RestController
-@RequestMapping(value = "/imsi")
+@RequestMapping(value = "/population")
 public class StatPopulationController {
 
     @Autowired
-    private StatPopulationRepository statPopulationRepository;
+    private PopuTrendMmSidoService popuTrendMmSidoService;
 
     @Autowired
-    private StatPopulationService statPopulationService;
+    private PopuMoveMmSidoService popuMoveMmSidoService;
 
     @RequestMapping(value = "/loadStatPopulationTrendSido" , method = RequestMethod.POST)
-    @ResponseBody
-    public String loadStatPopulationTrendSido(@RequestBody StatPopulationTrendSidoQVO statPopulationTrendSidoQVO)
-            throws IOException {
+    public ResponseEntity<Message> loadStatPopulationTrendSido(@RequestBody YyyymmQVO yyyymmQvo){
+    	
         System.out.println("start loadStatPopulationTrendSido");
-
-        statPopulationService.uploadStatPopulationTrendSido(statPopulationTrendSidoQVO.getYyyymm());
+        
+        popuTrendMmSidoService.doFromToMonth(yyyymmQvo.getStartYyyymm(), yyyymmQvo.getEndYyyymm());
         String rt = "success";
-
-        return rt;
+        
+        Message message = new Message();
+        HttpHeaders headers= new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        message.setCode(StatusEnum.OK);
+        message.setData(rt);
+        return new ResponseEntity<>(message, headers, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/loadStatPopulationMoveSido" , method = RequestMethod.POST)
-    @ResponseBody
-    public String loadStatPopulationMoveSido(@RequestBody StatPopulationMoveSidoQVO statPopulationMoveSidoQVO)
-            throws IOException {
+    public ResponseEntity<Message> loadStatPopulationMoveSido(@RequestBody YyyymmQVO yyyymmQvo) {
         System.out.println("start loadStatPopulationMoveSido");
 
-        statPopulationService.uploadStatPopulationMoveSido(statPopulationMoveSidoQVO.getYyyymm());
+        popuMoveMmSidoService.doFromToMonth(yyyymmQvo.getStartYyyymm(), yyyymmQvo.getEndYyyymm());
         String rt = "success";
 
-        return rt;
+        Message message = new Message();
+        HttpHeaders headers= new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        message.setCode(StatusEnum.OK);
+        message.setData(rt);
+
+        return new ResponseEntity<>(message, headers, HttpStatus.OK);
+
     }
 }
