@@ -1,10 +1,14 @@
 package com.apimarket.openapi.biz.population.repository;
 
-import com.apimarket.openapi.biz.population.model.StatPopulationMoveSidoVO;
-import com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.apimarket.openapi.biz.population.model.StatPopulationMoveSidoVO;
+import com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO;
+import com.apimarket.openapi.biz.population.model.UploadStatListVO;
 
 @Repository
 public class StatPopulationRepository {
@@ -37,4 +41,9 @@ public class StatPopulationRepository {
     public int deletePopulationMoveSido(String yyyymm) {
         return sqlSessionTemplate.delete(MAPPER_NAME_SPACE + "deletePopulationMoveSido" , yyyymm);
     }
+    
+    public List<UploadStatListVO> selectUploadStatList() {
+        return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectUploadStatList" );
+    }
+
 }

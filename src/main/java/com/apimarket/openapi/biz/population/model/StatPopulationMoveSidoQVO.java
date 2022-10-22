@@ -1,10 +1,8 @@
 package com.apimarket.openapi.biz.population.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class StatPopulationMoveSidoQVO {
 
     //연월

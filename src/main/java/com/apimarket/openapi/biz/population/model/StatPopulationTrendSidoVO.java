@@ -1,10 +1,8 @@
 package com.apimarket.openapi.biz.population.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class StatPopulationTrendSidoVO {
 
     //연월
@@ -43,21 +41,4 @@ public class StatPopulationTrendSidoVO {
     //조이혼율(천명당)
     private double divorceRatio;
 
-    @Override
-    public String toString() {
-        return "StatPopulationTrendSidoVO{" +
-                "yyyymm='" + yyyymm + '\'' +
-                ", sido2Cd='" + sido2Cd + '\'' +
-                ", birthCnt=" + birthCnt +
-                ", birthRatio=" + birthRatio +
-                ", deathCnt=" + deathCnt +
-                ", deathRatio=" + deathRatio +
-                ", increaseCnt=" + increaseCnt +
-                ", increaseRatio=" + increaseRatio +
-                ", marryCnt=" + marryCnt +
-                ", marryRatio=" + marryRatio +
-                ", divorceCnt=" + divorceCnt +
-                ", divorceRatio=" + divorceRatio +
-                '}';
-    }
 }

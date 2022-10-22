@@ -1,10 +1,8 @@
 package com.apimarket.openapi.biz.population.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class StatPopulationMoveSidoVO {
 
     //연월
@@ -28,16 +26,4 @@ public class StatPopulationMoveSidoVO {
     //시도간전출(명)
     private double overOutCnt;
 
-    @Override
-    public String toString() {
-        return "StatPopulationMoveSidoVO{" +
-                "yyyymm='" + yyyymm + '\'' +
-                ", sidoCd='" + sidoCd + '\'' +
-                ", totInCnt=" + totInCnt +
-                ", totOutCnt=" + totOutCnt +
-                ", netCnt=" + netCnt +
-                ", overInCnt=" + overInCnt +
-                ", overOutCnt=" + overOutCnt +
-                '}';
-    }
 }

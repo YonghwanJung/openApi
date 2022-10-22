@@ -99,4 +99,26 @@
 	]]>
     </delete>
 
+    <select id="selectUploadStatList"  resultType="com.apimarket.openapi.biz.population.model.UploadStatListVO">
+        <![CDATA[
+		SELECT '시도별 월별 주민등록인구통계' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_JUMIN_SIDO 
+		UNION ALL
+		SELECT '시도별 월별 인구동향' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_TREND_SIDO   
+		UNION ALL
+		SELECT '시도별 월별 인구이동' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_MOVE_SIDO 
+		]]>
+    </select>
+
 </mapper>
