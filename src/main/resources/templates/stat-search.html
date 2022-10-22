@@ -1,0 +1,52 @@
+{{>layout/header}}
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a href="/" class="nav-link fs-2" aria-current="page">Home</a></li>
+    <li class="nav-item"><a href="/stat/search" class="nav-link active fs-2">분야별 통계 조회</a></li>
+    <li class="nav-item"><a href="/posts/save" class="nav-link fs-2">통계자료 적재</a></li>
+  </ul>
+</header>
+<header class="navbar navbar-dark sticky-top bg-light flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">분야별 통계 조회</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</header>
+{{=<% %>=}}
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active  active" href="#">
+              개요
+            </a>
+          </li>        
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              시도별 주민등록인구 통계
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              시도별 인구동향 (출생,사망)
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+<main>
+<div style="padding:0 0 0 200px;" class="container-fluid text-bg-light py-5" >
+	<div class="m-5" style="height: 800px;">
+		<h1>분야별 통계를 조회합니다.</h1>
+		<br/>
+		<h2> - 각종 통계 지표와 가공통계들이 모여있는 공간입니다.</h2>
+	</div>
+</div>
+</main>
+<%={{ }}=%>
+{{>layout/common-lib}}
+<script src="/js/app/stat-search.js"></script>
+{{>layout/footer}}

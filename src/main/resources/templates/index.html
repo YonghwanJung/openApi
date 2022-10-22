@@ -1,12 +1,20 @@
 {{>layout/header}}
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/" class="nav-link active fs-2" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="/stat/search" class="nav-link fs-2">분야별 통계 조회</a></li>
+        <li class="nav-item"><a href="/posts/save" class="nav-link fs-2">통계자료 적재</a></li>
+      </ul>
+    </header>
 {{=<% %>=}}
+<main>
 <div class="container-fluid text-bg-light px-5 py-5" >
-	<div class="m-5" style="height: 1000px;">
+	<div class="m-5" style="height: 800px;">
 		<h1>세상의통계 경제사회연구소에 오신것을 환영합니다.</h1>
 		<br/>
-		<h2> - 세상의 여러 통계를 제공하는 공간입니다</h2>
+		<h2> - 세상의 여러 통계를 제공하고 통계를 기반으로 경제와 사회를 연구합니다.</h2>
 	</div>
 </div>
+</main>
 <%={{ }}=%>
 {{>layout/common-lib}}
 <script src="/js/app/index.js"></script>

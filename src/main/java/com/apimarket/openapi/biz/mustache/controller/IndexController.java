@@ -18,6 +18,12 @@ public class IndexController {
         return "posts-save";
     }
 
+    @GetMapping("/stat/search")
+    public String statSearch() {
+        return "stat-search";
+    }
+
+    
 	@RequestMapping("test")
 	public String test() {
 		return "This is spring";
