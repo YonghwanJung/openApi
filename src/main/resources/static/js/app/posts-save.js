@@ -1,6 +1,6 @@
 const main = {
     init : function (){
-        var _this = this;
+        const _this = this;
         //이벤트 셋팅
         $('#btn-save1').on('click', function () {
             _this.upload();

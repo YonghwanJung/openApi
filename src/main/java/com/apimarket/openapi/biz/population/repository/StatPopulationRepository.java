@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.apimarket.openapi.biz.population.model.PopulationJuminSidoListVO;
+import com.apimarket.openapi.biz.population.model.PopulationTrendSidoListVO;
 import com.apimarket.openapi.biz.population.model.StatPopulationMoveSidoVO;
 import com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO;
 import com.apimarket.openapi.biz.population.model.UploadStatListVO;
@@ -46,4 +48,13 @@ public class StatPopulationRepository {
         return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectUploadStatList" );
     }
 
+    public List<PopulationJuminSidoListVO> selectPopulationJuminSidoList(String yyyymm) {
+        return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectPopulationJuminSidoList" , yyyymm);
+    }    
+
+    public List<PopulationTrendSidoListVO> selectPopulationTrendSidoList(String yyyymm) {
+        return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectPopulationTrendSidoList" , yyyymm);
+    }    
+
+    
 }
