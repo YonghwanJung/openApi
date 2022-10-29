@@ -1,5 +1,6 @@
 package com.apimarket.openapi.biz.population.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -43,18 +44,41 @@ public class StatPopulationRepository {
     public int deletePopulationMoveSido(String yyyymm) {
         return sqlSessionTemplate.delete(MAPPER_NAME_SPACE + "deletePopulationMoveSido" , yyyymm);
     }
-    
+
+    public int insertStatPopulationEconActiveSido(HashMap<String, String> paramMap) {
+        return sqlSessionTemplate.insert(MAPPER_NAME_SPACE + "insertStatPopulationEconActiveSido" , paramMap);
+    }
+
+    public int selectExistChkStatPopulationEconActiveSido(String yyyymm) {
+        return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectExistChkStatPopulationEconActiveSido" , yyyymm);
+    }
+
+    public int deleteStatPopulationEconActiveSido(String yyyymm) {
+        return sqlSessionTemplate.delete(MAPPER_NAME_SPACE + "deleteStatPopulationEconActiveSidoo" , yyyymm);
+    }
+    public int insertStatPopulationEconActiveAdjust(HashMap<String, String> paramMap) {
+        return sqlSessionTemplate.insert(MAPPER_NAME_SPACE + "insertStatPopulationEconActiveAdjust" , paramMap);
+    }
+
+    public int selectExistChkStatPopulationEconActiveAdjust(String yyyymm) {
+        return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectExistChkStatPopulationEconActiveAdjust" , yyyymm);
+    }
+
+    public int deleteStatPopulationEconActiveAdjust(String yyyymm) {
+        return sqlSessionTemplate.delete(MAPPER_NAME_SPACE + "deleteStatPopulationEconActiveAdjust" , yyyymm);
+    }
+
     public List<UploadStatListVO> selectUploadStatList() {
         return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectUploadStatList" );
     }
 
     public List<PopulationJuminSidoListVO> selectPopulationJuminSidoList(String yyyymm) {
         return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectPopulationJuminSidoList" , yyyymm);
-    }    
+    }
 
     public List<PopulationTrendSidoListVO> selectPopulationTrendSidoList(String yyyymm) {
         return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectPopulationTrendSidoList" , yyyymm);
-    }    
+    }
 
-    
+
 }
