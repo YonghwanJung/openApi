@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StatPopulationMapper">
+
+    <insert id="insertStatPopulationTrendSido" parameterType="com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO" >
+        INSERT INTO STAT_POPULATION_TREND_SIDO (
+        YYYYMM	,
+        SIDO2_CD	,
+        BIRTH_CNT	,
+        BIRTH_RATIO	,
+        DEATH_CNT	,
+        DEATH_RATIO	,
+        INCREASE_CNT	,
+        INCREASE_RATIO	,
+        MARRY_CNT	,
+        MARRY_RATIO	,
+        DIVORCE_CNT	,
+        DIVORCE_RATIO	,
+        CREATE_TIME	,
+        CREATE_USER
+        )
+        VALUES (
+        #{yyyymm}	,
+        #{sido2Cd}	,
+        #{birthCnt}	,
+        #{birthRatio}	,
+        #{deathCnt}	,
+        #{deathRatio}	,
+        #{increaseCnt}	,
+        #{increaseRatio}	,
+        #{marryCnt}	,
+        #{marryRatio}	,
+        #{divorceCnt}	,
+        #{divorceRatio}	,
+        now()	,
+        'system'
+        )
+    </insert>
+
+    <select id="selectExistChkStatPopulationTrendSido" parameterType="String" resultType="int">
+        <![CDATA[
+        SELECT COUNT(*) CNT
+          FROM STAT_POPULATION_TREND_SIDO A
+        WHERE A.YYYYMM = #{yyyymm}
+
+	]]>
+    </select>
+
+    <delete id="deletePopulationTrendSido" parameterType="String" >
+        <![CDATA[
+        DELETE
+          FROM STAT_POPULATION_TREND_SIDO
+        WHERE YYYYMM = #{yyyymm}
+	]]>
+    </delete>
+
+    <insert id="insertStatPopulationMoveSido" parameterType="com.apimarket.openapi.biz.population.model.StatPopulationMoveSidoVO" >
+        INSERT INTO STAT_POPULATION_MOVE_SIDO (
+        YYYYMM	,
+        SIDO_CD	,
+        TOT_IN_CNT	,
+        TOT_OUT_CNT	,
+        NET_CNT	,
+        OVER_IN_CNT	,
+        OVER_OUT_CNT	,
+        CREATE_TIME	,
+        CREATE_USER
+        )
+        VALUES (
+        #{yyyymm}	,
+        #{sidoCd}	,
+        #{totInCnt}	,
+        #{totOutCnt}	,
+        #{netCnt}	,
+        #{overInCnt}	,
+        #{overOutCnt}	,
+        now()	,
+        'system'
+        )
+    </insert>
+
+    <select id="selectExistChkStatPopulationMoveSido" parameterType="String" resultType="int">
+        <![CDATA[
+        SELECT COUNT(*) CNT
+          FROM STAT_POPULATION_MOVE_SIDO A
+        WHERE A.YYYYMM = #{yyyymm}
+
+	]]>
+    </select>
+
+    <delete id="deletePopulationMoveSido" parameterType="String" >
+        <![CDATA[
+        DELETE
+          FROM STAT_POPULATION_MOVE_SIDO
+        WHERE YYYYMM = #{yyyymm}
+	]]>
+    </delete>
+
+
+    <insert id="insertStatPopulationEconActiveSido" parameterType="java.util.HashMap" >
+    INSERT INTO STAT_POPULATION_ECON_ACTIVE_SIDO
+    (
+    YYYYMM
+    ,SIDO2_CD
+    ,OVER15_CNT
+    ,EMPLOYMENT_OVER15_UNDER64_RATE
+    ,ECON_ACTIVE_CNT
+    ,EMPLOYEE_CNT
+    ,UNEMPLOYED_CNT
+    ,NOT_ECON_ACTIVE_CNT
+    ,ECON_ACTIVE_RATE
+    ,UNEMPLOYMENT_RATE
+    ,EMPLOYMENT_RATE
+    ,CREATE_TIME
+    ,CREATE_USER
+    )
+     VALUES (
+    #{YYYYMM}
+    , #{SIDO2_CD}
+    , #{OVER15_CNT}
+    , #{EMPLOYMENT_OVER15_UNDER64_RATE}
+    , #{ECON_ACTIVE_CNT}
+    , #{EMPLOYEE_CNT}
+    , #{UNEMPLOYED_CNT}
+    , #{NOT_ECON_ACTIVE_CNT}
+    , #{ECON_ACTIVE_RATE}
+    , #{UNEMPLOYMENT_RATE}
+    , #{EMPLOYMENT_RATE}
+    , now()
+    , 'SYSTEM'
+    )
+    </insert>
+
+    <insert id="insertStatPopulationEconActiveAdjust" parameterType="java.util.HashMap" >
+    INSERT INTO STAT_POPULATION_ECON_ACTIVE_ADJUST
+    (
+    YYYYMM
+    ,GENDER_CD
+    ,OVER15_CNT
+    ,ECON_ACTIVE_CNT
+    ,EMPLOYEE_CNT
+    ,UNEMPLOYED_CNT
+    ,NOT_ECON_ACTIVE_CNT
+    ,ECON_ACTIVE_RATE
+    ,UNEMPLOYMENT_RATE
+    ,EMPLOYMENT_RATE
+    ,CREATE_TIME
+    ,CREATE_USER
+    ,UDATE_TIME
+    ,UPDATE_USER
+    )
+     VALUES (
+    #{YYYYMM}
+    , #{GENDER_CD}
+    , #{OVER15_CNT}
+    , #{ECON_ACTIVE_CNT}
+    , #{EMPLOYEE_CNT}
+    , #{UNEMPLOYED_CNT}
+    , #{NOT_ECON_ACTIVE_CNT}
+    , #{ECON_ACTIVE_RATE}
+    , #{UNEMPLOYMENT_RATE}
+    , #{EMPLOYMENT_RATE}
+    , #{CREATE_TIME}
+    , #{CREATE_USER}
+    , #{UDATE_TIME}
+    , #{UPDATE_USER}
+    )
+    </insert>
+
+    <select id="selectExistChkStatPopulationEconActiveAdjust" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_POPULATION_ECON_ACTIVE_ADJUST A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatPopulationEconActiveAdjust" parameterType="String" >
+        DELETE
+          FROM STAT_POPULATION_ECON_ACTIVE_ADJUST
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+
+    <select id="selectUploadStatList"  resultType="com.apimarket.openapi.biz.population.model.UploadStatListVO">
+        <![CDATA[
+		SELECT '시도별 월별 주민등록인구통계' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_JUMIN_SIDO
+		UNION ALL
+		SELECT '시도별 월별 인구동향' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_TREND_SIDO
+		UNION ALL
+		SELECT '시도별 월별 인구이동' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_MOVE_SIDO
+		  		UNION ALL
+		SELECT '행정구역(시도)별 경제활동인구' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_ECON_ACTIVE_SIDO
+		  		UNION ALL
+		SELECT '계절조정 경제활동인구 총괄' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_POPULATION_ECON_ACTIVE_ADJUST
+		]]>
+    </select>
+
+    <select id="selectPopulationJuminSidoList" parameterType="String" resultType="com.apimarket.openapi.biz.population.model.PopulationJuminSidoListVO">
+        <![CDATA[
+        SELECT
+            A.SIDO_NAME AS SIDO_NAME,
+            FORMAT(A.TOT_CNT,0) AS TOT_CNT,
+            FORMAT(A.DIFF_M_TOT_CNT,0) AS DIFF_MONTH_TOT_CNT,
+            A.RATIO_M_TOT_CNT AS RATIO_MONTH_TOT_CNT,
+        	 FORMAT(A.DIFF_Y_TOT_CNT,0) AS DIFF_YEAR_TOT_CNT,
+            A.RATIO_Y_TOT_CNT AS RATIO_YEAR_TOT_CNT
+        FROM
+            (
+                SELECT
+                    A.YYYYMM,
+                    A.SIDO_CD,
+                    A.SIDO_NAME,
+                    A.TOT_CNT,
+                    A.PREV_M_TOT_CNT,
+                    A.TOT_CNT - A.PREV_M_TOT_CNT AS DIFF_M_TOT_CNT,
+                    ROUND(
+                        ((A.TOT_CNT - A.PREV_M_TOT_CNT) / A.PREV_M_TOT_CNT) * 100,
+                        2
+                    ) AS RATIO_M_TOT_CNT,
+                    A.PREV_Y_TOT_CNT,
+                    A.TOT_CNT - A.PREV_Y_TOT_CNT AS DIFF_Y_TOT_CNT,
+                    ROUND(
+                        ((A.TOT_CNT - A.PREV_Y_TOT_CNT) / A.PREV_Y_TOT_CNT) * 100,
+                        2
+                    ) AS RATIO_Y_TOT_CNT
+                FROM
+                    (
+                        SELECT
+                            A.YYYYMM,
+                            A.SIDO_CD,
+                            B.SIDO_NAME,
+                            A.TOT_CNT,
+                            C.TOT_CNT AS PREV_M_TOT_CNT,
+                            F.TOT_CNT AS PREV_Y_TOT_CNT
+                        FROM STAT_POPULATION_JUMIN_SIDO A
+                            INNER JOIN CODE_SIDO B ON A.SIDO_CD = B.SIDO_CD
+                            INNER JOIN STAT_POPULATION_JUMIN_SIDO C
+                            ON  DATE_FORMAT(DATE_ADD(STR_TO_DATE( CONCAT(A.YYYYMM , '01'),'%Y%m%d') , INTERVAL -1 MONTH) ,'%Y%m') = C.YYYYMM
+        						  AND A.SIDO_CD = C.SIDO_CD
+                            INNER JOIN STAT_POPULATION_JUMIN_SIDO F
+                            ON  DATE_FORMAT(DATE_ADD(STR_TO_DATE( CONCAT(A.YYYYMM , '01'),'%Y%m%d') , INTERVAL -12 MONTH) ,'%Y%m') = F.YYYYMM
+        						  AND A.SIDO_CD = F.SIDO_CD
+        					WHERE A.YYYYMM = #{yyyymm}
+                    ) A
+            ) A
+        ORDER BY
+            YYYYMM,
+            SIDO_CD
+		]]>
+    </select>
+
+
+    <select id="selectPopulationTrendSidoList" parameterType="String" resultType="com.apimarket.openapi.biz.population.model.PopulationTrendSidoListVO">
+    <![CDATA[
+    SELECT
+	    B.SIDO2_NAME AS SIDO_NAME,
+	    FORMAT(A.BIRTH_CNT,0) AS BIRTH_CNT,
+	    FORMAT(A.DEATH_CNT,0) AS DEATH_CNT,
+	    FORMAT(A.INCREASE_CNT,0) AS INCREASE_CNT
+	FROM STAT_POPULATION_TREND_SIDO A
+    INNER JOIN CODE_SIDO2 B ON A.SIDO2_CD = B.SIDO2_CD
+	WHERE YYYYMM = #{yyyymm}
+	]]>
+	</select>
+
+</mapper>
