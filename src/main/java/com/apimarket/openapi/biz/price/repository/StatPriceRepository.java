@@ -33,5 +33,16 @@ public class StatPriceRepository {
         return sqlSessionTemplate.delete(MAPPER_NAME_SPACE + "deleteStatCpiForLiving" , yyyymm);
     }
 
+    public int insertStatCpiFluctuation(HashMap<String, String> paramMap) {
+        return sqlSessionTemplate.insert(MAPPER_NAME_SPACE + "insertStatCpiFluctuation" , paramMap);
+    }
+
+    public int selectExistChkStatCpiFluctuation(String yyyymm) {
+        return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectExistChkStatCpiFluctuation" , yyyymm);
+    }
+
+    public int deleteStatCpiFluctuation(String yyyymm) {
+        return sqlSessionTemplate.delete(MAPPER_NAME_SPACE + "deleteStatCpiFluctuation" , yyyymm);
+    }
 
 }
