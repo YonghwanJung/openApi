@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StatEconomyMapper">
+
+    <insert id="insertStatEconGeneralIndex" parameterType="java.util.HashMap" >
+    INSERT INTO STAT_ECON_GENERAL_INDEX
+    (
+    YYYYMM
+    ,ECON_INDEX_ITEM_CD
+    ,ECON_INDEX
+    ,CREATE_TIME
+    ,CREATE_USER
+    )
+     VALUES (
+    #{YYYYMM}
+    , #{ECON_INDEX_ITEM_CD}
+    , #{ECON_INDEX}
+    , now()
+    , 'system'
+    )
+    </insert>
+
+    <select id="selectExistChkStatEconGeneralIndex" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_ECON_GENERAL_INDEX A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatEconGeneralIndex" parameterType="String" >
+        DELETE
+          FROM STAT_ECON_GENERAL_INDEX
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+
+</mapper>

@@ -2,8 +2,9 @@ package com.apimarket.openapi.biz.imsi.service;
 
 import com.apimarket.openapi.biz.imsi.model.RestAccidentRiskAreaQVO;
 import com.apimarket.openapi.biz.imsi.model.RestAccidentRiskAreaRVO;
-import com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO;
 import com.apimarket.openapi.biz.imsi.repository.ImsiRepository;
+import com.apimarket.openapi.biz.kostat.population.model.StatPopulationTrendSidoVO;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,13 @@
 const main = {
     init : function (){
         const _this = this;
+        $("header a[href='/stat/search']").addClass("active");
+        $("#sidebarMenu a[href='/population/juminSido']").addClass("active");
+
         //이벤트 셋팅
         $('#btn-select').on('click', function () {
             _this.selList();
-        });        
+        });
 
 		const yyyymm = common.getYYYYMM(-1);
 		$('#yyyymm').val(yyyymm);
@@ -13,17 +16,17 @@ const main = {
 
     selList : () => {
 		const yyyymm =  $('#yyyymm').val().replace('-','');
-        
+
         if(yyyymm.length != 6) {
 	        alert("조회년월이 부적합합니다.");
 	        return;
 		}
-		
+
 		var data = {
             startYyyymm: yyyymm ,
             endYyyymm: yyyymm
         };
-		
+
 	    $.ajax({
             type: 'POST',
             url: '/population/juminSidoList',
@@ -32,14 +35,14 @@ const main = {
             data: JSON.stringify(data),
         }).done(response => {
 			console.log(response);
-			const template = $('#mp_template').html();		
+			const template = $('#mp_template').html();
 			const data = {'data' : response.data};
 			console.log(`data : ${data}`);
-			const rendered = Mustache.render(template,data);	
+			const rendered = Mustache.render(template,data);
 			console.log(`rendered : ${rendered}`);
 			$('#target').html(rendered);
 		}).fail(response => {
-			console.log(response);			
+			console.log(response);
 		});
 	},
 }

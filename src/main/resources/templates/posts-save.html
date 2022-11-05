@@ -1,10 +1,4 @@
 {{>layout/header}}
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/" class="nav-link fs-2" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/stat/search" class="nav-link fs-2">분야별 통계 조회</a></li>
-        <li class="nav-item"><a href="/posts/save" class="nav-link active fs-2">통계자료 적재</a></li>
-      </ul>
-    </header>
 {{=<% %>=}}
 <main>
 <div class="container-fluid text-bg-light p-5">
@@ -13,19 +7,25 @@
             <div class="form-group">
                 <label for="sel1" class="form-label fs-3">적재대상 통계를 선택하세요</label>
 			    <select style="width:500px;" class="form-select mb-3 fs-3" id="selStatic">
-			      <option value='loadStatPopulationTrendSido' data-adjustmonth='-3' >월별 인구동향</option>
-			      <option value='loadStatPopulationMoveSido' data-adjustmonth='-2' >월별 인구이동</option>
+			      <option value='loadStatPopulationTrendSido' data-category='population' data-adjustmonth='-2' >월별 인구동향</option>
+			      <option value='loadStatPopulationMoveSido' data-category='population' data-adjustmonth='-1' >월별 인구이동</option>
+			      <option value='loadStatPopulationEconActiveSido' data-category='population' data-adjustmonth='-1' >행정구역(시도)별 경제활동인구</option>
+			      <option value='loadStatPopulationEconActiveAdjst' data-category='population' data-adjustmonth='-1' >계절조정 경제활동인구 총괄</option>
+			      <option value='loadStatCpi' data-category='price' data-adjustmonth='-1' >생활물가지수(2020＝100)</option>
+			      <option value='loadStatCpiFluctuation' data-category='price' data-adjustmonth='-1' >월별 소비자물가 등락률</option>
+			      <option value='loadStatPpiTotal' data-category='price' data-adjustmonth='-1' >생산자물가지수(기본분류)</option>
+			      <option value='loadEconGeneralIndex' data-category='economy' data-adjustmonth='-1' >경기종합지수(2015=100) (10차)</option>
 			    </select>
 			    <div class="d-flex align-items-center">
-	                <label class="form-label mb-3 me-3 fs-3" for="title">시작년월~종료년월:</label>	                
-	                <input style="width:220px;" type="month" class="form-control mb-3 me-3 fs-3" 
+	                <label class="form-label mb-3 me-3 fs-3" for="title">시작년월~종료년월:</label>
+	                <input style="width:220px;" type="month" class="form-control mb-3 me-3 fs-3"
 	                id="startYyyymm" placeholder="시작년월(yyyymm)을 입력하세요">
 	                <p class="me-3"> ~ </p>
-	                <input style="width:220px;" type="month" class="form-control mb-3 me-3 fs-3" 
+	                <input style="width:220px;" type="month" class="form-control mb-3 me-3 fs-3"
 	                id="endYyyymm" placeholder="종료년월(yyyymm)을 입력하세요">
 	                <div id="loadingbar" class="spinner-border align-items-center" style="display:none;"></div>
                 </div>
-                
+
             </div>
 	    </div>
 	</div>
@@ -58,7 +58,7 @@
 				   		<td class="text-end">{{totalCnt}}</td>
 			    	</tr>
 					{{/data}}
-				</script>				    				
+				</script>
 			</table>
 		</div>
 	</div>

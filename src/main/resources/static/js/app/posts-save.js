@@ -1,11 +1,12 @@
 const main = {
     init : function (){
         const _this = this;
+        $("header a[href='/posts/save']").addClass("active");
         //이벤트 셋팅
         $('#btn-save1').on('click', function () {
             _this.upload();
-        });        
-        
+        });
+
 		$('#selStatic').on('change' , () => {
 			const cnt = $('#selStatic option:selected').data("adjustmonth");
 			const yyyymm = common.getYYYYMM(cnt);
@@ -13,34 +14,36 @@ const main = {
 			$('#endYyyymm').val(yyyymm);
 		});
 		$('#selStatic').trigger('change');
-		
+
 		_this.selList();
     },
     upload : function () {
+		const _this = this;
         const staticId = $('#selStatic option:selected').val();
         const staticText = $('#selStatic option:selected').text();
         const startYyyymm =  $('#startYyyymm').val().replace('-','');
         const endYyyymm =  $('#endYyyymm').val().replace('-','');
-        
+		const category = $('#selStatic option:selected').data("category");
         if(startYyyymm.length != 6
         || endYyyymm.length != 6
         ) {
 	        alert("시작년월, 종료년월이 부적합합니다.");
 	        return;
 		}
-        const chkMessage = staticText + " " 
+        const chkMessage = staticText + " "
         + startYyyymm + "~"
         + endYyyymm + " 적재하시겠습니까?";
         const chk = confirm(chkMessage);
-        
+
         if(chk == false) return;
-        
+
         var data = {
             startYyyymm: startYyyymm ,
             endYyyymm: endYyyymm ,
         };
-		
-		const prcUrl = '/population/'+ staticId;
+
+		const prcUrl = `/${category}/load/${staticId}`;
+		console.log(`prcUrl : ${prcUrl}`);
 		$('#btn-save1').addClass('disabled');
 		$('#loadingbar').css('display','block');
         $.ajax({
@@ -55,7 +58,7 @@ const main = {
 			var data = JSON.parse(response).data;
 			console.log(data);
             alert('정상처리되었습니다.' + ' : ' + data);
-            _this.selList();            
+            _this.selList();
             //window.location.href = '/';
         }).fail(function(response) {
 			$('#loadingbar').css('display','none');
@@ -72,12 +75,12 @@ const main = {
             contentType:'application/json; charset=utf-8',
         }).done(response => {
 			console.log(response);
-			const template = $('#mp_template').html();		
+			const template = $('#mp_template').html();
 			const data = {'data' : response.data};
-			const rendered = Mustache.render(template,data);	
+			const rendered = Mustache.render(template,data);
 			$('#target').html(rendered);
 		}).fail(response => {
-			console.log(response);			
+			console.log(response);
 		});
 	},
 }

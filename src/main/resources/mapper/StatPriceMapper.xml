@@ -101,4 +101,33 @@
         WHERE YYYYMM = #{yyyymm}
     </delete>
 
+    <insert id="insertStatPpiTotal" parameterType="java.util.HashMap" >
+    INSERT INTO STAT_PPI_TOTAL
+    (
+    YYYYMM
+    ,PPI_RATE
+    ,CREATE_TIME
+    ,CREATE_USER
+    )
+     VALUES (
+    #{YYYYMM}
+    , #{PPI_RATE}
+    , now()
+    , 'system'
+    )
+    </insert>
+
+    <select id="selectExistChkStatPpiTotal" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_PPI_TOTAL A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatStatPpiTotal" parameterType="String" >
+        DELETE
+          FROM STAT_PPI_TOTAL
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+
+
 </mapper>

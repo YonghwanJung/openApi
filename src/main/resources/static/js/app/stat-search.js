@@ -1,6 +1,8 @@
 const main = {
     init : function (){
-        var _this = this;
+        const _this = this;
+        $("header a[href='/stat/search']").addClass("active");
+        $("#sidebarMenu a[href='/stat/search']").addClass("active");
     },
 }
 

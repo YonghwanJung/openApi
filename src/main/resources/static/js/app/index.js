@@ -1,12 +1,7 @@
 var main = {
-	mp_template: `Date: {{ date }} <br> 
-	Time: {{ time }} <br> 
-	Unix time: {{ milliseconds_since_epoch }}`,
-	repos: {
-  		"repos": []
-	},
 	init: function() {
 		var _this = this;
+		$("header a[href='/']").addClass("active");
 		$("#btn").on('click', function() {
 			var template = $("#mp_template").html();
 			console.log(template);

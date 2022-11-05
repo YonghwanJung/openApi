@@ -1,42 +1,6 @@
 {{>layout/header}}
-  <ul class="nav nav-pills">
-    <li class="nav-item"><a href="/" class="nav-link fs-2" aria-current="page">Home</a></li>
-    <li class="nav-item"><a href="/stat/search" class="nav-link active fs-2">분야별 통계 조회</a></li>
-    <li class="nav-item"><a href="/posts/save" class="nav-link fs-2">통계자료 적재</a></li>
-  </ul>
-</header>
-<header class="navbar navbar-dark sticky-top bg-light flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-xl-3 me-0 px-3 fs-4" href="#">분야별 통계 조회</a>
-  <button class="navbar-toggler position-absolute d-xl-none collapsed bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</header>
+{{>layout/stat-search-sidebar}}
 {{=<% %>=}}
-<div class="container-fluid">
-  <div class="row">
-    <nav id="sidebarMenu" class="col-xl-3 d-xl-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item fs-3 py-3">
-            <a class="nav-link" href="/stat/search">
-              개요
-            </a>
-          </li>        
-          <li class="nav-item fs-3 py-3">
-            <a class="nav-link active" href="/population/juminSido">
-              시도별 주민등록인구 통계
-            </a>
-          </li>
-          <li class="nav-item fs-3 py-3">
-            <a class="nav-link" href="/population/trendSido">
-              시도별 인구동향 (출생,사망)
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-</div>
 <main class="col-xl-9 ms-sm-auto">
 <div class="container-fluid text-bg-light p-5">
 	<div class="row mb-3">
@@ -44,10 +8,10 @@
             <div class="form-group">
                 <label for="sel1" class="form-label fs-3">주민등록 인구 통계 조회 (자료: 통계청 KOSIS 국가통계포털)</label>
 			    <div class="d-flex align-items-center">
-	                <label class="form-label mb-3 me-3 fs-3" for="title">조회년월</label>	                
-	                <input style="width:220px;" type="month" class="form-control mb-3 me-3 fs-3" 
+	                <label class="form-label mb-3 me-3 fs-3" for="title">조회년월</label>
+	                <input style="width:220px;" type="month" class="form-control mb-3 me-3 fs-3"
 	                id="yyyymm" placeholder="조회년월(yyyymm)을 입력하세요">
-                </div>                
+                </div>
             </div>
 	    </div>
 	</div>
@@ -80,7 +44,7 @@
 				   		<td class="text-end">{{diffYearTotCnt}} <br/>( {{ratioYearTotCnt}} )</td>
 			    	</tr>
 					{{/data}}
-				</script>				    				
+				</script>
 			</table>
 		</div>
 	</div>

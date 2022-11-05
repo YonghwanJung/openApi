@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.StatPopulationMapper">
 
-    <insert id="insertStatPopulationTrendSido" parameterType="com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO" >
+    <insert id="insertStatPopulationTrendSido" parameterType="com.apimarket.openapi.biz.kostat.population.model.StatPopulationTrendSidoVO" >
         INSERT INTO STAT_POPULATION_TREND_SIDO (
         YYYYMM	,
         SIDO2_CD	,
@@ -57,7 +57,7 @@
 	]]>
     </delete>
 
-    <insert id="insertStatPopulationMoveSido" parameterType="com.apimarket.openapi.biz.population.model.StatPopulationMoveSidoVO" >
+    <insert id="insertStatPopulationMoveSido" parameterType="com.apimarket.openapi.biz.kostat.population.model.StatPopulationMoveSidoVO" >
         INSERT INTO STAT_POPULATION_MOVE_SIDO (
         YYYYMM	,
         SIDO_CD	,
@@ -134,6 +134,18 @@
     )
     </insert>
 
+    <select id="selectExistChkStatPopulationEconActiveSido" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_POPULATION_ECON_ACTIVE_SIDO A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatPopulationEconActiveSido" parameterType="String" >
+        DELETE
+          FROM STAT_POPULATION_ECON_ACTIVE_SIDO
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+
     <insert id="insertStatPopulationEconActiveAdjust" parameterType="java.util.HashMap" >
     INSERT INTO STAT_POPULATION_ECON_ACTIVE_ADJUST
     (
@@ -182,7 +194,7 @@
         WHERE YYYYMM = #{yyyymm}
     </delete>
 
-    <select id="selectUploadStatList"  resultType="com.apimarket.openapi.biz.population.model.UploadStatListVO">
+    <select id="selectUploadStatList"  resultType="com.apimarket.openapi.biz.kostat.population.model.UploadStatListRVO">
         <![CDATA[
 		SELECT '시도별 월별 주민등록인구통계' AS STAT_NAME
 		     , MIN(YYYYMM) AS START_YYYYMM
@@ -201,22 +213,46 @@
 		     , MAX(YYYYMM) AS END_YYYYMM
 		     , COUNT(*) AS TOTAL_CNT
 		  FROM STAT_POPULATION_MOVE_SIDO
-		  		UNION ALL
+		UNION ALL
 		SELECT '행정구역(시도)별 경제활동인구' AS STAT_NAME
 		     , MIN(YYYYMM) AS START_YYYYMM
 		     , MAX(YYYYMM) AS END_YYYYMM
 		     , COUNT(*) AS TOTAL_CNT
 		  FROM STAT_POPULATION_ECON_ACTIVE_SIDO
-		  		UNION ALL
+		UNION ALL
 		SELECT '계절조정 경제활동인구 총괄' AS STAT_NAME
 		     , MIN(YYYYMM) AS START_YYYYMM
 		     , MAX(YYYYMM) AS END_YYYYMM
 		     , COUNT(*) AS TOTAL_CNT
 		  FROM STAT_POPULATION_ECON_ACTIVE_ADJUST
+		UNION ALL
+		SELECT '생활물가지수(2020＝100)' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_CPI_FOR_LIVING
+		UNION ALL
+		SELECT '월별 소비자물가 등락률' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_CPI_FLUCTUATION
+		UNION ALL
+		SELECT ' 생산자물가지수(기본분류)' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_PPI_TOTAL
+		UNION ALL
+		SELECT '경기종합지수(2015=100) (10차)' AS STAT_NAME
+		     , MIN(YYYYMM) AS START_YYYYMM
+		     , MAX(YYYYMM) AS END_YYYYMM
+		     , COUNT(*) AS TOTAL_CNT
+		  FROM STAT_ECON_GENERAL_INDEX
 		]]>
     </select>
 
-    <select id="selectPopulationJuminSidoList" parameterType="String" resultType="com.apimarket.openapi.biz.population.model.PopulationJuminSidoListVO">
+    <select id="selectPopulationJuminSidoList" parameterType="String" resultType="com.apimarket.openapi.biz.kostat.population.model.PopulationJuminSidoListRVO">
         <![CDATA[
         SELECT
             A.SIDO_NAME AS SIDO_NAME,
@@ -271,7 +307,7 @@
     </select>
 
 
-    <select id="selectPopulationTrendSidoList" parameterType="String" resultType="com.apimarket.openapi.biz.population.model.PopulationTrendSidoListVO">
+    <select id="selectPopulationTrendSidoList" parameterType="String" resultType="com.apimarket.openapi.biz.kostat.population.model.PopulationTrendSidoListRVO">
     <![CDATA[
     SELECT
 	    B.SIDO2_NAME AS SIDO_NAME,

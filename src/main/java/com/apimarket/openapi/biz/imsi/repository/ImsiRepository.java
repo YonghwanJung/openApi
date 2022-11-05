@@ -2,7 +2,8 @@ package com.apimarket.openapi.biz.imsi.repository;
 
 import com.apimarket.openapi.biz.imsi.model.ImsiVo;
 import com.apimarket.openapi.biz.imsi.model.RestAccidentRiskAreaRVO;
-import com.apimarket.openapi.biz.population.model.StatPopulationTrendSidoVO;
+import com.apimarket.openapi.biz.kostat.population.model.StatPopulationTrendSidoVO;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
