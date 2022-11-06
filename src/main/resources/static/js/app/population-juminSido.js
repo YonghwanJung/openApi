@@ -1,5 +1,5 @@
 const main = {
-    init : function (){
+    init : function() {
         const _this = this;
         $("header a[href='/stat/search']").addClass("active");
         $("#sidebarMenu a[href='/population/juminSido']").addClass("active");
@@ -8,13 +8,13 @@ const main = {
         $('#btn-select').on('click', function () {
             _this.selList();
         });
-
-		const yyyymm = common.getYYYYMM(-1);
-		$('#yyyymm').val(yyyymm);
-        _this.selList();
+		const statInfo = common.selMaxYyyymm('01' ,(maxYyyymm)=>{
+			$('#yyyymm').val(maxYyyymm);
+        	_this.selList();
+		});
     },
-
-    selList : () => {
+    selList : function() {
+		const _this = this;
 		const yyyymm =  $('#yyyymm').val().replace('-','');
 
         if(yyyymm.length != 6) {
@@ -34,17 +34,13 @@ const main = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data),
         }).done(response => {
-			console.log(response);
 			const template = $('#mp_template').html();
 			const data = {'data' : response.data};
-			console.log(`data : ${data}`);
 			const rendered = Mustache.render(template,data);
-			console.log(`rendered : ${rendered}`);
 			$('#target').html(rendered);
 		}).fail(response => {
 			console.log(response);
 		});
 	},
 }
-
 main.init();

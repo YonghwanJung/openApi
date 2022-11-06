@@ -8,12 +8,13 @@ const main = {
             _this.selList();
         });
 
-		const yyyymm = common.getYYYYMM(-3);
-		$('#yyyymm').val(yyyymm);
-        _this.selList();
+		const statInfo = common.selMaxYyyymm('02' ,(maxYyyymm)=>{
+			$('#yyyymm').val(maxYyyymm);
+        	_this.selList();
+		});
     },
 
-    selList : () => {
+    selList : function() {
 		const yyyymm =  $('#yyyymm').val().replace('-','');
 
         if(yyyymm.length != 6) {
