@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apimarket.openapi.biz.kostat.population.model.PopulationJuminSidoListRVO;
+import com.apimarket.openapi.biz.kostat.population.model.PopulationMoveSidoListRVO;
 import com.apimarket.openapi.biz.kostat.population.model.PopulationTrendSidoListRVO;
 import com.apimarket.openapi.biz.kostat.population.model.UploadStatListRVO;
 import com.apimarket.openapi.biz.kostat.population.service.StatPopulationService;
@@ -61,9 +62,24 @@ public class StatPopulationViewController {
     @RequestMapping(value = "/trendSidoList" , method = RequestMethod.POST)
     public ResponseEntity<Message> getTrendSidoList(@RequestBody YyyymmQVO yyyymmQvo){
 
-        System.out.println("start getJuminSidoList");
+        System.out.println("start getTrendSidoList");
 
         List<PopulationTrendSidoListRVO> resultList = statPopulationService.getPopulationTrendSidoList(yyyymmQvo.getStartYyyymm());
+
+        Message message = new Message();
+        HttpHeaders headers= new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        message.setCode(StatusEnum.OK);
+        message.setData(resultList);
+        return new ResponseEntity<>(message, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/moveSidoList" , method = RequestMethod.POST)
+    public ResponseEntity<Message> getMoveSidoList(@RequestBody YyyymmQVO yyyymmQvo){
+
+        System.out.println("start getMoveSidoList");
+
+        List<PopulationMoveSidoListRVO> resultList = statPopulationService.getPopulationMoveSidoList(yyyymmQvo.getStartYyyymm());
 
         Message message = new Message();
         HttpHeaders headers= new HttpHeaders();

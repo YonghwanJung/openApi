@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.apimarket.openapi.biz.kostat.population.model.PopulationJuminSidoListRVO;
+import com.apimarket.openapi.biz.kostat.population.model.PopulationMoveSidoListRVO;
 import com.apimarket.openapi.biz.kostat.population.model.PopulationTrendSidoListRVO;
 import com.apimarket.openapi.biz.kostat.population.model.StatPopulationMoveSidoVO;
 import com.apimarket.openapi.biz.kostat.population.model.StatPopulationTrendSidoVO;
@@ -80,5 +81,8 @@ public class StatPopulationRepository {
         return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectPopulationTrendSidoList" , yyyymm);
     }
 
+    public List<PopulationMoveSidoListRVO> selectPopulationMoveSidoList(String yyyymm) {
+        return sqlSessionTemplate.selectList(MAPPER_NAME_SPACE + "selectPopulationMoveSidoList" , yyyymm);
+    }
 
 }

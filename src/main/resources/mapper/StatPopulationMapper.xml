@@ -329,4 +329,22 @@
 	]]>
 	</select>
 
+    <select id="selectPopulationMoveSidoList" parameterType="String" resultType="com.apimarket.openapi.biz.kostat.population.model.PopulationMoveSidoListRVO">
+    <![CDATA[
+    SELECT
+        B.SIDO_NAME AS SIDO_NAME,
+        FORMAT(A.NET_CNT,0) AS NET_CNT,
+        FORMAT(A.TOT_IN_CNT,0) AS TOT_IN_CNT,
+        FORMAT(A.TOT_OUT_CNT,0) AS TOT_OUT_CNT,
+        FORMAT(A.OVER_IN_CNT,0) AS OVER_IN_CNT,
+        FORMAT(A.OVER_OUT_CNT,0) AS OVER_OUT_CNT
+    FROM
+        STAT_POPULATION_MOVE_SIDO A
+        INNER JOIN CODE_SIDO B ON A.SIDO_CD = B.SIDO_CD
+    WHERE
+        A.YYYYMM = #{yyyymm}
+    ORDER BY A.SIDO_CD
+	]]>
+	</select>
+
 </mapper>

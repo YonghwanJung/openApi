@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apimarket.openapi.biz.kostat.population.model.PopulationJuminSidoListRVO;
+import com.apimarket.openapi.biz.kostat.population.model.PopulationMoveSidoListRVO;
 import com.apimarket.openapi.biz.kostat.population.model.PopulationTrendSidoListRVO;
 import com.apimarket.openapi.biz.kostat.population.model.UploadStatListRVO;
 import com.apimarket.openapi.biz.kostat.population.repository.StatPopulationRepository;
@@ -26,5 +27,9 @@ public class StatPopulationService {
 
 	public List<PopulationTrendSidoListRVO> getPopulationTrendSidoList(String yyyymm) {
 		return statPopulationRepository.selectPopulationTrendSidoList(yyyymm);
+	}
+
+	public List<PopulationMoveSidoListRVO> getPopulationMoveSidoList(String yyyymm) {
+		return statPopulationRepository.selectPopulationMoveSidoList(yyyymm);
 	}
 }
