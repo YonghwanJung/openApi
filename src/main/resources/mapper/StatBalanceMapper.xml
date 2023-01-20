@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StatBalanceMapper">
+
+    <insert id="insertStatTradeSummary" parameterType="java.util.HashMap" >
+    INSERT INTO STAT_TRADE_SUMMARY
+    (
+    YYYYMM
+    ,EXPORT_AMT
+    ,IMPORT_AMT
+    ,TRADE_BALANCE
+    ,CREATE_TIME
+    ,CREATE_USER
+    )
+     VALUES (
+      #{YYYYMM}
+    , #{EXPORT_AMT}
+    , #{IMPORT_AMT}
+    , #{TRADE_BALANCE}
+    , now()
+    , 'system'    )
+    </insert>
+
+    <select id="selectExistChkStatTradeSummary" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_TRADE_SUMMARY A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatTradeSummary" parameterType="String" >
+        DELETE
+          FROM STAT_TRADE_SUMMARY
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+
+    <insert id="insertStatInternationalBalance" parameterType="java.util.HashMap" >
+    INSERT INTO STAT_INTERNATIONAL_BALANCE
+    (
+    YYYYMM
+    ,CURRENT_BALANCE
+    ,GOODS_BALANCE
+    ,SERVICE_BALANCE
+    ,PRIMARY_INCOME_BALANCE
+    ,TRANSFER_INCOME_BALANCE
+    ,CREATE_TIME
+    ,CREATE_USER
+    )
+     VALUES (
+      #{YYYYMM}
+    , #{CURRENT_BALANCE}
+    , #{GOODS_BALANCE}
+    , #{SERVICE_BALANCE}
+    , #{PRIMARY_INCOME_BALANCE}
+    , #{TRANSFER_INCOME_BALANCE}
+    , now()
+    , 'system'
+    )
+    </insert>
+
+    <select id="selectExistChkStatInternationalBalance" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_INTERNATIONAL_BALANCE A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatInternationalBalance" parameterType="String" >
+        DELETE
+          FROM STAT_INTERNATIONAL_BALANCE
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+</mapper>
