@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StatRealEstateMapper">
+
+    <insert id="insertStatApartSalesPriceIndex" parameterType="java.util.HashMap" >
+	INSERT INTO STAT_APART_SALES_PRICE_INDEX
+	(
+	YYYYMM
+	,SCI_REGION_CD
+	,INDEX_VALUE
+	,CREATE_TIME
+	,CREATE_USER
+	)
+	 VALUES (
+	  #{YYYYMM}
+	, #{SCI_REGION_CD}
+	, #{INDEX_VALUE}
+	, now()
+	, 'system'
+	)
+
+    </insert>
+
+    <select id="selectExistChkStatApartSalesPriceIndex" parameterType="String" resultType="int">
+     SELECT COUNT(*) CNT
+       FROM STAT_APART_SALES_PRICE_INDEX A
+     WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatApartSalesPriceIndex" parameterType="String" >
+        DELETE
+          FROM STAT_APART_SALES_PRICE_INDEX
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+
+    <insert id="insertStatUnsoldHousingSigungu" parameterType="java.util.HashMap" >
+	INSERT INTO STAT_UNSOLD_HOUSING_SIGUNGU
+	(
+	YYYYMM
+	,SIDO_NM
+	,SIGUNGU_NM
+	,CNT
+	,CREATE_TIME
+	,CREATE_USER
+	)
+	 VALUES (
+	#{YYYYMM}
+	, #{SIDO_NM}
+	, #{SIGUNGU_NM}
+	, #{CNT}
+    , now()
+    , 'system'
+	)
+    </insert>
+
+    <select id="selectExistChkStatUnsoldHousingSigungu" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_UNSOLD_HOUSING_SIGUNGU A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatUnsoldHousingSigungu" parameterType="String" >
+        DELETE
+          FROM STAT_UNSOLD_HOUSING_SIGUNGU
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+
+    <insert id="insertStatBadUnsoldHousing" parameterType="java.util.HashMap" >
+	INSERT INTO STAT_BAD_UNSOLD_HOUSIONG
+	(
+	YYYYMM
+	,REGION_NM
+	,CNT
+	,CREATE_TIME
+	,CREATE_USER
+	)
+	 VALUES (
+	#{YYYYMM}
+	, #{REGION_NM}
+	, #{CNT}
+    , now()
+    , 'system'
+    )
+    </insert>
+
+    <select id="selectExistChkStatBadUnsoldHousing" parameterType="String" resultType="int">
+        SELECT COUNT(*) CNT
+          FROM STAT_BAD_UNSOLD_HOUSIONG A
+        WHERE A.YYYYMM = #{yyyymm}
+    </select>
+
+    <delete id="deleteStatBadUnsoldHousing" parameterType="String" >
+        DELETE
+          FROM STAT_BAD_UNSOLD_HOUSIONG
+        WHERE YYYYMM = #{yyyymm}
+    </delete>
+</mapper>
